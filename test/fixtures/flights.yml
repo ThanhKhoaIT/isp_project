@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  city_form: 1
+  city_to: 1
+  price: 1.5
+  total_hour: 1
+
+two:
+  city_form: 1
+  city_to: 1
+  price: 1.5
+  total_hour: 1

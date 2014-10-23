@@ -1,0 +1,46 @@
+<aside>
+	<div class="main">
+       	<a href="#" class="btnPrev"><img src="/assets/button-1.png" alt=""></a><a href="#" class="btnNext"><img src="/assets/button-2.png" alt=""></a>
+    	<div id="carousel">
+            <ul id="myRoundabout">
+              <li><img src="/assets/img1.png" alt="" /></li>
+              <li><img src="/assets/img2.png" alt="" /></li>
+              <li><img src="/assets/img3.png" alt="" /></li>
+              <li><img src="/assets/img4.png" alt="" /></li>
+              <li><img src="/assets/img5.png" alt="" /></li>
+            </ul>
+          </div>
+    </div>
+</aside>
+<script type="text/javascript">
+   // <![CDATA[
+   $(document).ready(function() {
+      $('ul#myRoundabout').roundabout({
+         shape: 'figure8'
+      });
+	  
+	  var cnn=[]
+	$('#myRoundabout li').each(function(){
+		cnn.push(this)
+	})
+	
+	var curr=0
+	$('.btnPrev').live('click',function(){
+		if(curr<0)
+			curr=cnn.length-1
+		else
+			curr--
+		$(cnn.slice(curr,curr+1)).trigger('click')
+		return false
+	})
+	$('.btnNext').live('click',function(){
+		if(curr<cnn.length)
+			curr++
+		else
+			curr=0
+		$(cnn.slice(curr,curr+1)).trigger('click')
+		return false
+	})
+   });
+   // ]]>
+  </script>

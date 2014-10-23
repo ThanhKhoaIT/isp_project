@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FlyAndStay LTD</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="top1">
+    <header>
+       <div class="main">
+           <h1><a href="/" class="logo">FlyAndStay LTD</a></h1>
+         <form action="" id="Search">
+					 <div class="indent">
+						 <div class="rowElem1">
+							 <a href="#" onClick="document.getElementById('Search').submit()" class=" fright alignMiddle">
+								 <img alt="" src="/assets/button.png" />
+								</a>
+								<input type="text" class="input" placeholder="Quick Search..."/>
+							</div>
+						</div>
+         </form>
+            <div class="inside">
+                <nav>
+                    <ul class="sf-menu">
+                        <li>
+													<a href="/" class="current">Home</a>
+												</li>
+                        <li>
+													<a href="/packages">Package</a>
+                        </li>
+                        <li>
+													<a href="index-2.html">services</a>
+												</li>
+                        <li>
+													<a href="index-3.html">products</a>
+												</li>
+                        <li>
+													<a href="index-4.html">projects</a>
+												</li>
+                        <li>
+													<a href="index-5.html">support</a>
+												</li>
+                        <li>
+													<a href="index-6.html">contacts</a>
+												</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+</div>
+
+
+<%= yield %>
+
+
+	<div class="container_16" style="padding:30px 0px">
+		<div class="container">
+			<div class="grid_6 alpha">
+				<h4 class="h4">new in support</h4>
+				<div class="container" style="font-size:12px">
+					<img class="img-left" src="/assets/6page_img7.png" alt="">
+					<h4>Advanced Customer Services </h4>
+					Erat lacininec in vel ipsm aucvorpt felieaculis laciia ictum ntumitsce euiso onsequat ant psuolor sit conse cteter adipis cing elitell eorq felieaclis laiia <br>ictum ntumit.usce euiso onsequat nt<br> eorq felieaculis laciia ictum ntuce.
+					<br class="clear">
+				</div>
+			</div>
+			<div class="grid_10 omega">
+				<h4 class="h4">Contact Me</h4>
+				<div class="container" style="font-size:12px">
+					<img class="img-left" src="/assets/at.png" alt="">
+					<h3>Sed ut perspiciatis unde omnis</h3>
+					<p>Erat la cininec in vel ipsum auctorvorpt felieum iaculisy euisod conse-<br>quat antpsum dolor sit conse ctetueradipiscing elitellenteue sedlorq </p>
+					<h3>Donec sagittis euismod purus</h3>
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. 
+					<br class="clear">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
