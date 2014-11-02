@@ -12,5 +12,19 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require_tree .
+
+//
+// window.ready = [];
+// window.callReady = function () {
+// 	$.each(window.ready, function(index, call) {
+// 		call();
+// 		console.log(index);
+// 	});
+// }
+// $(document).ready(window.callReady);
+// $(document).on("page:receive", window.callReady);
+// // $(document).on('page:receive', function() {
+// // 	window.callReady();
+// // });

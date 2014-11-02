@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  package_id: 1
+  body: MyString
+  parent_comment_id: 1
+  user_id: 1
+
+two:
+  package_id: 1
+  body: MyString
+  parent_comment_id: 1
+  user_id: 1

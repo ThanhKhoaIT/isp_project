@@ -5,40 +5,16 @@
 		<section id="content">
 			<div class="main">
 				<div class="inside">
-					<h2>Packages recently</h2>
+					<h2>Packages recently <a href="/create_package" style="font-size:15px; color:#DD4108">Create package for me</a></h2>
 					<div class="container_16">
 						<div class="tail2">
 							<div class="container">
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img1.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Director</strong> , Sam Kromstain<br>
-									"Sed in lacus ut enim adipiscing aliquet aucvorpt felieaculis lacinia ictum <br>ntumit.usce euiso onsequat ant psuolor <br>sit conse ctetuer adipis cing elitell ..."
-								</div>
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img2.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Industrial Engineer,</strong> John McCoist <br>
-									"Pellentesque sed dolorm aucvorpt felieaculis lacinia ictum ntumit.usce euiso onsequat ant psuolor sit conse ctetuer adipis cing elitell eorqm coue ..."
-								</div>
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img3.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Industrial Specialist,</strong> Alan Smith<br>
-									"Erat lacininec in vel ipsum aucvorpt felieaculis lacinia ictum ntumit.usce euiso onsequat ant psuolor sit conse ctetuer adipis cing elitell eorqm coue ..."
-								</div>
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img1.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Director</strong> , Sam Kromstain<br>
-									"Sed in lacus ut enim adipiscing aliquet aucvorpt felieaculis lacinia ictum <br>ntumit.usce euiso onsequat ant psuolor <br>sit conse ctetuer adipis cing elitell ..."
-								</div>
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img2.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Industrial Engineer,</strong> John McCoist <br>
-									"Pellentesque sed dolorm aucvorpt felieaculis lacinia ictum ntumit.usce euiso onsequat ant psuolor sit conse ctetuer adipis cing elitell eorqm coue ..."
-								</div>
-								<div class="grid_5">
-									<a href="#"><img alt="" src="/assets/2page_img3.jpg" class="img-indent" /></a><br>
-									<strong class="txt">Industrial Specialist,</strong> Alan Smith<br>
-									"Erat lacininec in vel ipsum aucvorpt felieaculis lacinia ictum ntumit.usce euiso onsequat ant psuolor sit conse ctetuer adipis cing elitell eorqm coue ..."
-								</div>
+								<%  @packages_recently.each do |package|%>
+									<div class="grid_5">
+										<a href="/packages/<%= package.id %>"><img alt="" src="/assets/2page_img1.jpg" class="img-indent"/></a><br>
+										<strong class="txt"><%= package.discription %></strong>
+									</div>
+								<% end %>
 							</div>
 						</div>
 					</div>
