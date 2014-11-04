@@ -16,3 +16,52 @@
  *= require style
  *= require_self
  */
+
+
+.circle_80 {
+	border-radius: 50px;
+	width:80px;
+	height:80px;
+	float:left;
+	margin-top: 10px;
+}
+
+.review {
+	float:left;
+	margin-left: 10px;
+/*	width: 90%;*/
+}
+
+.detail_package {
+	margin-bottom: 20px;
+}
+
+.btn_post {
+	width: 80px;
+	height: 35px;
+	float:right;
+	border:1px solid #35bee0;
+	padding: 8px 20px;
+	background: #35bee0;
+	color:#fff;
+}
+
+.btn_link {
+	border:1px solid #35bee0;
+	padding: 8px 20px;
+	float:left;
+	background: #35bee0;
+	color:#fff;
+}
+.btn_post:hover, .btn_post:focus, .btn_link:hover, .btn_link:focus {
+	border:1px solid #29A1BC;
+	text-decoration:none;
+	text-shadow:1px 1px 1px #333;
+}
+
+.review_raw {
+	float:left;
+	width:100%;
+	border-bottom:1px solid #ddd;
+	margin-bottom:5px;
+}

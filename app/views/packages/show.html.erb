@@ -3,16 +3,50 @@
 		<section id="content">
 			<div class="main">
 				<div class="inside">
-					<h2><%= @package.discription %></h2>
-					<div class="container_16">
-						
+					<h2><%= @package.description %></h2>
+					<div class="container_16 detail_package">
 						<div class="container">
 							<span>Total Amount: <%= @package.total_amount %> USD</span>
 							<br/>
 							<span>Total Days: <%= @package.total_days %> days</span>
+						</div>	
+					</div>
+					
+					<div class="container" style="border-top:4px dashed #ddd; padding-top: 20px">
+						<h1 style="font-size: 18px; margin-bottom:20px">Reviews</h1>
+						<% @package.comments.each do |comment| %>
+							<div class="review_raw">
+								<img src="<%= comment.user.avatar %>" class="circle_80"/>
+								<div class="review" style="width:90%; float:left">
+									<h4 class="p"><%= comment.user.full_name %></h4>
+									<%= comment.body %>
+									<br class="clear">
+								</div>
+							</div>
+						<% end %>
+					</div>
+					
+					<div class="container">
+						<div class="review">
+							<div id="login">
+								<% if user_signed_in? %>
+								  <%= form_for(@comment, url: "/comments", method: "POST") do |f| %>
+								    <fieldset class="clearfix">
+											<img src="<%= current_user.avatar %>" class="circle_80"/>
+											<span class="fontawesome-lock"></span>
+											<%= f.text_area :body, placeholder: "Write comment...", style: "width: 80%; height: 90px; resize: none; margin-left: 10px" %>
+											<%= f.hidden_field :package_id %>
+								      <input type="submit" value="Post" class="btn_post" style="margin-right:-20px">
+								    </fieldset>
+								  <% end %>
+								<% else %>
+									<a href="/users/sign_in" class="btn_link">Sign in for comments</a>
+								<% end %>	
+							</div>
 						</div>
-						
-					</div>	
+					</div>
+					
+					
 				</div>
 			</div>
 		</section>

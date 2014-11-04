@@ -1,0 +1,25 @@
+<div class="bg_cont1">
+	<div class="bg_cont">
+		<section id="content">
+			<div class="main">
+				<div class="inside">
+					<h2>Packages</h2>
+					<div class="container_16">
+						
+						<div class="container">
+							<% @packages.each do |package| %>
+							<div class="grid_5">
+								<a href="/packages/<%= package.id %>">
+									<img class="img-indent" src="/assets/2page_img2.jpg" alt="">
+								</a><br>
+								<strong class="txt"><%= package.description %></strong>
+							</div>
+							<% end %>
+						</div>
+						
+					</div>	
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

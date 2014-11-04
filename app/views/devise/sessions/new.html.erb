@@ -1,5 +1,5 @@
 <div id="login">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: "/users/sign_in", method: "POST") do |f| %>
     <fieldset class="clearfix">
       <p>
 				<span class="fontawesome-user"></span>
