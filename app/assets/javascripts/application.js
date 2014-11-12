@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+//= jquery.simplePagination
+
 // require turbolinks
 //= require_tree .
 
@@ -28,3 +31,8 @@
 // // $(document).on('page:receive', function() {
 // // 	window.callReady();
 // // });
+
+
+// $(document).delegate(".move_by a", "click", function(event) {
+// 	console.log((event.currentTarget))
+// })

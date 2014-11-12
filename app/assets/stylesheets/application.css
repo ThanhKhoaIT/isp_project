@@ -12,8 +12,11 @@
  *
  * require_tree .
  *= require reset
+ *= require admin/icons
  *= require grid
  *= require style
+ *= require buttons
+ *= require simplePagination
  *= require_self
  */
 

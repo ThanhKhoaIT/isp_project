@@ -60,6 +60,10 @@ gem 'devise'
 
 # gem 'activeadmin', github: 'activeadmin'
 
-gem 'ants_admin', github: 'ThanhKhoaIT/ants_admin'
+# gem 'ants_admin', github: 'ThanhKhoaIT/ants_admin'
 
 gem "paperclip", "~> 4.2"
+
+gem 'formtastic', '~> 3.0'
+
+gem 'paypal-sdk-adaptivepayments'

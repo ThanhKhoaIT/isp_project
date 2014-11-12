@@ -6,10 +6,32 @@
 					<h2><%= @package.description %></h2>
 					<div class="container_16 detail_package">
 						<div class="container">
-							<span>Total Amount: <%= @package.total_amount %> USD</span>
+							<img src="<%= @package.image.url %>" class="original">
+							
+							<span>Total Amount: <strong><%= @package.total_amount %> USD</strong></span>
 							<br/>
-							<span>Total Days: <%= @package.total_days %> days</span>
+							<span>Total Days: <strong><%= @package.total_days %> days</strong></span>
+							<br/>
+							<span>Discount: <strong><%= @package.discount || 0 %> USD</strong></span>
+							<br/>
+							<br/>
+							
+							<% if user_signed_in? %>
+								<% @cart_item = CartItem.new({package_id: @package.id, quantity: 1, price: @package.total_amount.to_f - @package.discount.to_f}) %>
+							  <%= form_for(@cart_item, url: "/carts", method: "POST") do |f| %>
+										<%= f.hidden_field :package_id %>
+										<%= f.hidden_field :quantity %>
+										<%= f.hidden_field :price %>
+									<input type="submit" value="Add Cart" class="btn_link" style="float:right; height: 40px; width: 120px; border-radius:4px">
+									<%= select_tag(:carts, options_for_select(current_user.carts.where({status: "new"}).collect{|c| [c.name, c.id]} + ["new cart"]), class: "select_cart", name: "cart_item[cart_id]") %>
+							  <% end %>
+							<% else %>
+								<a href="/users/sign_in" style="float:right" class="btn_link">Sign in for Add Cart</a>
+							<% end %>
+							<br/>
+							
 						</div>	
+						
 					</div>
 					
 					<div class="container" style="border-top:4px dashed #ddd; padding-top: 20px">
@@ -27,17 +49,16 @@
 					</div>
 					
 					<div class="container">
-						<div class="review">
-							<div id="login">
+						<div class="review"  style="width:99%">
+							<div id="login" style="width:100%">
 								<% if user_signed_in? %>
 								  <%= form_for(@comment, url: "/comments", method: "POST") do |f| %>
-								    <fieldset class="clearfix">
+								    <fieldset class="clearfix" style="width:100%">
 											<img src="<%= current_user.avatar %>" class="circle_80"/>
-											<span class="fontawesome-lock"></span>
-											<%= f.text_area :body, placeholder: "Write comment...", style: "width: 80%; height: 90px; resize: none; margin-left: 10px" %>
+											<%= f.text_area :body, placeholder: "Write comment...", class: "review_box" %>
 											<%= f.hidden_field :package_id %>
-								      <input type="submit" value="Post" class="btn_post" style="margin-right:-20px">
 								    </fieldset>
+										<input type="submit" value="Post" class="btn_post">
 								  <% end %>
 								<% else %>
 									<a href="/users/sign_in" class="btn_link">Sign in for comments</a>

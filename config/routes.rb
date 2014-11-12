@@ -1,15 +1,38 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users#, :controllers => { :registrations => "users/registrations" }
   # devise_for :admin_users, ActiveAdmin::Devise.config
   # ActiveAdmin.routes(self)
   
   root to: 'home#index'
   
   get "create_package" => "home#create_package"
+  post "create_package" => "home#build_package"
   get "packages/:id" => "packages#show"
   get "packages" => "packages#index"
+  get "cities_to" => "home#cities_to"
+  get "flights" => "home#flights"
+
+  delete "cart_items/:id" => "carts#delete_item"
+  post "cart_items" => "carts#update_item"
+  get "admin" => "admin#index"
+  get "confirm_cart/:id" => "home#confirm_cart"
+  post "confirm" => "home#confirm"
+  get "active/:token" => "home#active"
+  get "contacts" => "home#contacts"
+  post "contacts" => "home#contacts_create"
+  get "callback" => "home#callback"
+  post "callback" => "home#callback"
+  
+  get "carts" => "carts#index"
+  resources :carts
   
   resources :comments
+  namespace :admin do
+    resources :cities
+    resources :flights
+    resources :packages
+  end
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

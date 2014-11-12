@@ -1,0 +1,31 @@
+<h3>
+	<i class="glyphicons google_maps"></i> Packages
+	<a href="/admin/packages/new" class="glyphicons plus"></a>
+</h3>
+<hr/>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Price</th>
+			<th>Tools</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @packages.each_with_index do |package, index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= package.description %></td>
+				<td><%= package.total_amount %></td>
+				<td><%= package.total_days %> USD</td>
+				<td><%= package.discount %> USD</td>
+				<td class="tools">
+					<a href="/admin/packages/<%= package.id %>/edit" class="glyphicons edit"></a>
+					<a href="/admin/packages/<%= package.id %>" data-method="delete" class="glyphicons bin"></a>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

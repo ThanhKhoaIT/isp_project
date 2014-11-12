@@ -1,0 +1,87 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<i class="glyphicon glyphicon-wrench pull-right"></i>
+			<h4>City</h4>
+		</div>
+	</div>
+	
+	<div class="panel-body">
+			
+		<%= semantic_form_for @city, html:  {class: "form form-vertical"}, url: @city.new_record? ? admin_cities_path :  admin_city_path(@city) do |f| %>
+		<div class="control-group">
+			<label>Name</label>
+			<%= f.input :name, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+		</div>
+		<div class="control-group select-country">
+			<label>Country</label>
+			<%= f.input :country_name, as: :select, collection: City::COUNTRIES, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			<%= f.input :position_x, as: :hidden %>
+			<%= f.input :position_y, as: :hidden %>
+		</div>
+		
+		<input id="search_maps" placeholder="Search location"/>
+		<span class="hint">"Enter" for search</span>
+		<div id="maps" style="margin-bottom: 30px"></div>
+		
+		<%= f.actions :submit, :cancel, class: 'action_button' %>
+		<% end %>
+          
+	</div>
+</div>
+<script src="<%= APP_CONFIG['google_maps'] %>" type="text/javascript"></script>
+<script>
+	$(document).ready(function() {
+		$.each($(".select-country option"), function(index, item) {
+			$(item).css("background-image", "url(/assets/flags/"+$(item).val()+".gif)");
+		})
+	})
+</script>
+
+<script type="text/javascript">
+	var addPoint = function (lat, lng) {
+		if (typeof(window.marker) != "undefined") {window.marker.setMap(null);}
+		var point = new google.maps.LatLng(lat,lng);
+		$("#city_position_x").val(lat);
+		$("#city_position_y").val(lng);
+		window.marker = new google.maps.Marker({position: point});
+		window.marker.setDraggable(true);
+		window.marker.setMap(window.map);
+		window.map.setCenter(point);
+		window.map.setZoom(8);
+	}
+	
+	function initialize() {
+		var mapOptions = {
+			center: { lat: 0, lng: 0},
+			zoom: 1
+		};
+		window.map = new google.maps.Map(document.getElementById('maps'), mapOptions);
+	}
+
+	$(document).ready(function() {
+		initialize();
+		if (<%= @city.position_x.present? %>) {
+			addPoint("<%= @city.position_x.to_s %>", "<%= @city.position_y.to_s %>");
+		}
+	})
+	
+	$("#search_maps").keydown(function(event) {
+		if (event.keyCode == 13) {
+			var data = $.ajax({
+				url: "<%= APP_CONFIG['gmaps'] %>"+$("#search_maps").val(),
+				success: function (data) {
+					var lat = data.results[0].geometry.location.lat;
+					var lng = data.results[0].geometry.location.lng;
+					addPoint(lat, lng);
+					
+					google.maps.event.addListener(window.marker, 'dragend', function(event){
+						$("#city_position_x").val(event.latLng.lat());
+						$("#city_position_y").val(event.latLng.lng());
+					});
+				}
+			});
+			return false;
+		}
+	});
+</script>

@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<i class="glyphicon glyphicon-wrench pull-right"></i>
+			<h4>Flight</h4>
+		</div>
+	</div>
+	
+	<div class="panel-body">
+			
+		<%= semantic_form_for @flight, html:  {class: "form form-vertical"}, url: @flight.new_record? ? admin_flights_path :  admin_flight_path(@flight) do |f| %>
+		<div class="control-group">
+			<label>From city</label>
+			<%= f.input :city_from_id, as: "select", collection: City.all, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			<label>To city</label>
+			<%= f.input :city_to_id, as: "select", collection: City.all, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Type</label>
+			<%= f.input :type_use, as: "select", collection: [['Airplane', 'airplane'],["Train", 'train'], ["Boat", "boat"]], wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Amount</label>
+			<%= f.input :price, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Total hour</label>
+			<%= f.input :total_hour, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+		</div>
+		
+		
+		<%= f.actions :submit, :cancel, class: 'action_button' %>
+		<% end %>
+          
+	</div>
+</div>

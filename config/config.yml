@@ -1,0 +1,16 @@
+defaults: &defaults
+  google_maps: "https://maps.googleapis.com/maps/api/js?v=3"
+  gmaps: "https://maps.googleapis.com/maps/api/geocode/json?address="
+  google_key: AIzaSyCokbncvD82-vu8wkIMb6hNcKozGDrGzd0
+  www: http://localhost:3000
+  email_paypal: thanhkhoait-facilitator@gmail.com
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  www: http://isp-app.tk

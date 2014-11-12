@@ -11,13 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103110417) do
+ActiveRecord::Schema.define(version: 20141112173556) do
+
+  create_table "cart_items", force: true do |t|
+    t.integer  "cart_id"
+    t.integer  "package_id"
+    t.float    "price",      limit: 24
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.float    "total",      limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cities", force: true do |t|
-    t.integer  "country_id"
     t.string   "name"
-    t.float    "position_x", limit: 24
-    t.float    "position_y", limit: 24
+    t.float    "position_x",   limit: 24
+    t.float    "position_y",   limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "country_name"
+  end
+
+  create_table "cities_packages", force: true do |t|
+    t.integer  "city_id"
+    t.integer  "package_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,12 +63,13 @@ ActiveRecord::Schema.define(version: 20141103110417) do
   end
 
   create_table "flights", force: true do |t|
-    t.integer  "city_form"
-    t.integer  "city_to"
-    t.float    "price",      limit: 24
+    t.integer  "city_from_id"
+    t.integer  "city_to_id"
+    t.float    "price",        limit: 24
     t.integer  "total_hour"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type_use"
   end
 
   create_table "hotels", force: true do |t|
@@ -112,6 +137,8 @@ ActiveRecord::Schema.define(version: 20141103110417) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role"
+    t.boolean  "active"
+    t.string   "token_active"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

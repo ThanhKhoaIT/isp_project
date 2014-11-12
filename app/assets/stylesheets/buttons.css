@@ -1,0 +1,91 @@
+.btn {
+	-moz-user-select: none;
+	cursor: pointer;
+	display: inline-block;
+	line-height: normal;
+	text-align: center;
+	vertical-align: baseline;
+	white-space: nowrap;
+}
+.btn::-moz-focus-inner {
+	border: 0 none;
+	padding: 0;
+}
+.btn {
+	background-color: #e6e6e6;
+	border: 0 none rgba(0, 0, 0, 0);
+	border-radius: 2px;
+	color: rgba(0, 0, 0, 0.8);
+	font-family: inherit;
+	font-size: 100%;
+	padding: 0.5em 1em;
+	text-decoration: none;
+}
+.btn-hover, .btn:hover, .btn:focus {
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
+}
+.btn:focus {
+	outline: 0 none;
+}
+.btn-active, .btn:active {
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.2) inset;
+}
+.btn[disabled], .btn-disabled, .btn-disabled:hover, .btn-disabled:focus, .btn-disabled:active {
+	background-image: none;
+	border: 0 none;
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.4;
+}
+.btn-hidden {
+	display: none;
+}
+.btn::-moz-focus-inner {
+	border: 0 none;
+	padding: 0;
+}
+.btn-primary, .btn-selected, a.btn-primary, a.btn-selected {
+	background-color: #0078e7;
+	color: #fff;
+}
+
+.btn-success,
+.btn-error,
+.btn-warning,
+.btn-secondary {
+	color: white;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+	background: rgb(28, 184, 65); /* this is a green */
+}
+
+.btn-error {
+	background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.btn-warning {
+	background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.btn-secondary {
+	background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.btn-xsmall {
+	font-size: 70%;
+}
+
+.btn-small {
+	font-size: 85%;
+}
+
+.btn-large {
+	font-size: 110%;
+}
+
+.btn-xlarge {
+	font-size: 125%;
+}

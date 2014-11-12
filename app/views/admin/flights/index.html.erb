@@ -1,0 +1,30 @@
+<h3>
+	<i class="glyphicons google_maps"></i> Flights
+	<a href="/admin/flights/new" class="glyphicons plus"></a>
+</h3>
+<hr/>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Price</th>
+			<th>Tools</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @flights.each_with_index do |flight, index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= flight.from_city.name %></td>
+				<td><%= flight.to_city.name %></td>
+				<td><%= flight.price %> USD</td>
+				<td class="tools">
+					<a href="/admin/flights/<%= flight.id %>/edit" class="glyphicons edit"></a>
+					<a href="/admin/flights/<%= flight.id %>" data-method="delete" class="glyphicons bin"></a>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

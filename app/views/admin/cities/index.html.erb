@@ -1,0 +1,28 @@
+<h3>
+	<i class="glyphicons google_maps"></i> Cities
+	<a href="/admin/cities/new" class="glyphicons plus"></a>
+</h3>
+<hr/>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Country</th>
+			<th>Tools</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @cities.each_with_index do |city, index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= city.name %></td>
+				<td><img src="/assets/flags/<%= city.country_name %>.gif"> <%= City::COUNTRIES.select{|i| (i[1] == city.country_name)}[0][0] %></td>
+				<td class="tools">
+					<a href="/admin/cities/<%= city.id %>/edit" class="glyphicons edit"></a>
+					<a href="/admin/cities/<%= city.id %>" data-method="delete" class="glyphicons bin"></a>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

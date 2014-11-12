@@ -1,7 +1,10 @@
 class PackagesController < ApplicationController
   
   def index
-    @packages = Package.all
+    @packages_count = Package.count
+    page = params[:page] || 1
+    @packages = Package.order("id desc")
+    @packages = @packages[(page.to_i-1)*6..(page.to_i)*6-1] || []
   end
 
   

@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<i class="glyphicon glyphicon-wrench pull-right"></i>
+			<h4>Package</h4>
+		</div>
+	</div>
+	
+	<div class="panel-body">
+			
+		<%= semantic_form_for @package, html:  {class: "form form-vertical"}, url: @package.new_record? ? admin_packages_path :  admin_package_path(@package) do |f| %>
+		<div class="control-group">
+			<label>Description</label>
+			<%= f.input :description, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			<label>Cities</label>
+			<%= f.input :cities, as: :select, wrapper_html: {class: "controls"}, input_html:{class: "form-control", "data-selected"=> @package.cities.collect(&:id)}, label: false %>
+			
+			<label>Total amount</label>
+			<%= f.input :total_amount, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Total days</label>
+			<%= f.input :total_days, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Discount</label>
+			<%= f.input :discount, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+			
+			<label>Image</label>
+			<%= f.input :image, as: :file, wrapper_html: {class: "controls"}, input_html:{class: "form-control"}, label: false %>
+		</div>
+		
+		
+		<%= f.actions :submit, :cancel, class: 'action_button' %>
+		<% end %>
+          
+	</div>
+</div>
+
+<script>
+	$("#package_city_ids").chosen();
+</script>

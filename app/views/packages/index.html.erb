@@ -9,13 +9,18 @@
 						<div class="container">
 							<% @packages.each do |package| %>
 							<div class="grid_5">
+								<% if package.discount.present? %>
+									<strong class="discount">-<%= package.discount %>$</strong>
+								<% end %>
 								<a href="/packages/<%= package.id %>">
-									<img class="img-indent" src="/assets/2page_img2.jpg" alt="">
+									<img class="img-indent" src="<%= package.image.url(:medium) %>" alt="">
 								</a><br>
 								<strong class="txt"><%= package.description %></strong>
 							</div>
 							<% end %>
 						</div>
+						
+						<div class="paginations"></div>
 						
 					</div>	
 				</div>
@@ -23,3 +28,13 @@
 		</section>
 	</div>
 </div>
+
+<script>
+$(".paginations").pagination({
+  items: <%= @packages_count %>,
+  itemsOnPage: 6,
+	currentPage: <%= params[:page] || 1 %>,
+	hrefTextPrefix: "?page=",
+  cssStyle: 'light-theme'
+});
+</script>

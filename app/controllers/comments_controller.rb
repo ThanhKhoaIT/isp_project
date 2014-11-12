@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
   def index
-    
+    @comments_count = Comment.count
+    page = params[:page] || 1
+    @comments = Comment.order("id desc")
+    @comments = @comments[(page.to_i-1)*5..(page.to_i)*5-1]
   end
 
   def show

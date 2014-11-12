@@ -3,36 +3,220 @@
 		<section id="content">
 			<div class="main">
 				<div id="map-canvas"></div>
+				<div id="list-map">
+					<span class="noite"></span>
+					<br/>
+					<a href="#" class="done_create btn" style="float:right">Done</a>
+				</div>
 			</div>
 		</section>
 	</div>
 </div>
-
+<script src="<%= APP_CONFIG['google_maps'] %>" type="text/javascript"></script>
 <script type="text/javascript">
-
-
-
+Array.prototype.remove = function() {
+	var what, a = arguments, L = a.length, ax;
+	while (L && this.length) {
+		what = a[--L];
+		while ((ax = this.indexOf(what)) !== -1) {
+			this.splice(ax, 1);
+		}
+	}
+	return this;
+};
 
 function initialize() {
 	var mapOptions = {
 		center: { lat: 0, lng: 0},
 		zoom: 1
 	};
-	var map = new google.maps.Map(document.getElementById('map-canvas'),
+	window.map = new google.maps.Map(document.getElementById('map-canvas'),
 	mapOptions);
 }
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
-      'callback=initialize';
-  document.body.appendChild(script);
+var showAllCity = function () {
+	$.each(window.places, function(index, item) {
+		item.setMap(window.map);
+	})
 }
 
-var initializes = function() {
-	loadScript
+
+var showCity = function (key) {
+	$.each(window.places, function(index, item) {
+		item.setMap(null);
+	})
+	$.ajax({
+		url: "/cities_to",
+		data: {
+			city: window.cities[key].id_city
+		},
+		success: function (data) {
+			$.each(JSON.parse(data).cities, function(index, item) {
+				$.each(window.places, function(i, city) {
+					if (city.id_city == item.id) {
+						city.setMap(window.map);
+					}
+				})
+			})
+		}
+	})
 }
 
-window.ready.push(initializes);
+
+var checkCity = function () {
+	if (window.cities_ids.length == 0) {
+		showAllCity();
+	} else {
+		showCity(window.cities_ids[window.cities_ids.length - 1]);
+	}
+}
+
+
+var update = function () {
+	if (window.cities_ids.length == 0) {
+		$("#list-map .noite").html("Select begin city!");
+		$(".done_create").hide();
+	} else {
+		$("#list-map .noite").html("Please, select next city!");
+		$(".done_create").show();
+		
+		var getFlights = function(key, from, to) {
+			var item = $("#"+key).parent(".item");
+			item.removeClass("show_flight").removeClass("show_airplane").removeClass("show_train").removeClass("show_boat");
+			
+			$.ajax({
+				url: "/flights",
+				data: {
+					from: from,
+					to: to
+				},
+				success: function (data) {
+					var flights = JSON.parse(data).flights;
+					if (flights.length > 0) {
+						item.addClass("show_flight");
+						$.each(flights, function(index, flight) {
+							item.addClass("show_"+flight.type_use);
+						});
+					}
+				}
+				
+			})
+		}
+		
+		
+		if (window.cities_ids.length > 1) {
+			$.each(window.cities_ids, function(i, city) {
+				if (i == window.cities_ids.length - 1) {
+					getFlights(window.cities_ids[i], window.cities[window.cities_ids[i]].id_city, window.cities[window.cities_ids[0]].id_city);
+				} else {
+					if (typeof(window.selected[window.cities_ids[i]]) == "undefined") {
+						getFlights(window.cities_ids[i], window.cities[window.cities_ids[i]].id_city, window.cities[window.cities_ids[i+1]].id_city);
+					}
+				}
+			})
+		}
+	}
+}
+
+
+var addPoint = function (id, lat, lng, title, country) {
+	var point = new google.maps.LatLng(lat,lng);
+	var marker = new google.maps.Marker({
+		position: point,
+		title: title,
+		map: window.map,
+		id_city: id,
+		country: country
+	});
+	return marker;
+}
+
+$(document).ready(function() {
+	window.places = [];
+	window.cities = {};
+	window.cities_ids = [];
+	window.selected = {};
+	initialize();
+	
+	var data = <%= raw City.all.collect{|city| {
+		'lat' => city.position_x, 
+		'lng' => city.position_y,
+		'title' => city.name,
+		'id' => city.id,
+		'country' => city.country_name
+	}}.to_json %>;
+	
+	$.each(data, function(index, item) {
+		setTimeout(function(){
+			var marker = addPoint(item.id, item.lat, item.lng, item.title, item.country);
+			window.places.push(marker);
+			google.maps.event.addListener(marker, 'click', function() {
+				var rd = "i" + parseInt(Math.random() * 1000 + 100000);
+				addCity(marker, rd);
+				window.cities[rd] = marker;
+				window.cities_ids.push(rd);
+				update();
+				checkCity();
+		  });
+		}, 50);
+	});
+	update();
+	
+	$(".done_create").click(function(event) {
+		var cities_ids = [];
+		var selected_types = [];
+		
+		$.each(window.cities_ids, function(index, city) {
+			cities_ids.push([city, window.cities[city].id_city]);
+		})
+		
+		$.each(window.selected, function(key, type) {
+			selected_types.push([key, type]);
+		})
+		$.ajax({
+			type: "POST",
+			url: "/create_package",
+			data: {
+				selected: selected_types,
+				cities: cities_ids,
+				authenticity_token: $("[name='csrf-token']").attr("content")
+			},
+			success: function (data) {
+				console.log(data);
+				if (data.success) {
+					window.location.href= "/";
+				}
+			}
+			
+		})
+	})
+})
+
+var addCity = function(marker, rd) {
+	var list_map = $("#list-map");
+	var temp = "<div class='city' id='"+rd+"'><span class='name'></span><img class='flag'/><a class='close glyphicons remove_2' href='#'></a></div><div class='move_by'><a href='#' class='glyphicons airplane' data-type='airplane'></a><a href='#' class='glyphicons train' data-type='train'></a><a href='#' class='glyphicons boat' data-type='boat'></a></div>";
+	var city = $("<div/>").addClass("item").html(temp)
+	city.find("img").attr("src", "/assets/flags/"+marker.country+".gif");
+	city.find(".name").html(marker.title);
+	city.insertBefore($(".noite"));
+	update();
+	
+	city.find(".close").click(function(event) {
+		window.cities[rd] = null;
+		window.cities_ids.remove(rd);
+		$("#"+rd).parent(".item").remove();
+		update();
+		checkCity();
+		return false;
+	})
+	
+	city.find(".move_by a").click(function(event) {
+		var type = $(event.currentTarget).attr("data-type");
+		window.selected[rd] = type;
+		city.find(".move_by a").removeClass("selected");
+		$(this).addClass("selected");
+		return false;
+	})
+}
+
 </script>

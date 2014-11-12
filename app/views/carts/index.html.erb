@@ -1,0 +1,41 @@
+<% if user_signed_in? %>
+	
+	<div class="bg_cont1">
+		<div class="bg_cont">
+			<section id="content">
+				<div class="main">
+					<div class="inside">
+						<h2>My Cart</h2>
+						<div class="container_16 detail_package">
+							<div class="container">
+								
+								<ul class="carts">
+									
+									<%  @carts.each do |cart| %>
+										<li class="<%= cart.status %>">
+											<a class="name" href="/carts/<%= cart.id %>"><%= cart.name %> (<%= cart.cart_items.count %> packages)</a>
+											<%= link_to("", "/carts/#{cart.id}", method: "delete", class: "glyphicons remove") %>
+											<div class="flags_show">
+												<% flags = [] %>
+												<% cart.cart_items.each do |item| %>
+													<% item.package.cities.each{|city| flags << city.country_name if !flags.include?(city.country_name) }%>
+												<% end %>
+												
+												<% flags.each do |flag| %>
+													<img src="/assets/flags/<%= flag %>.gif"/>
+												<% end %>
+											</div>
+										</li>
+										
+									<% end %>
+								</ul>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<% end %>

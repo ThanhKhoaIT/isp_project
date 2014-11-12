@@ -1,0 +1,30 @@
+<div class="bg_cont1">
+	<div class="bg_cont">
+		<section id="content">
+			<div class="main">
+				<div class="inside">
+					<% if @user %>
+						<h2>Active account is Successful!</h2>
+						<div class="container_16 detail_package">
+							<div class="container" style="">
+								<div class="container_16 detail_package" style="text-align:center">
+									<a href="/users/sign_in" class="pay_center btn btn-primary">Login</a>
+								</div>
+							</div>
+						</div>
+					<% else %>
+						<h2>Active account is Failed!</h2>
+						<div class="container_16 detail_package">
+							<div class="container" style="">
+								<div class="container_16 detail_package" style="text-align:center">
+									<a href="/contacts" class="pay_center btn btn-primary">Contact to administrator</a>
+								</div>
+							</div>
+						</div>
+					<% end %>
+					
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

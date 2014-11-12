@@ -1,0 +1,45 @@
+<div class="bg_cont1">
+	<div class="bg_cont">
+		<section id="content">
+			<div class="main">
+				<div class="inside">
+					<h2>Reviews</h2>
+					<div class="container_16">
+						
+						<div class="container">
+							<% @comments.each do |comment|%>
+								<div class="container review" style="border-bottom: 1px solid #aaa; padding-bottom: 10px">
+									<div class="grid_1 alpha">
+										<img src="<%= comment.user.avatar %>" alt=""><br>
+									</div>
+									<div class="grid_15 omega">
+										<div class="box">
+											<div class="indent-box">
+												<h3><%= comment.user.full_name %></h3>
+												<h4><%= comment.created_at.strftime("%R - %d, %b %Y") %></h4>
+												<%= comment.body %>
+											</div>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+						
+						<div class="paginations"></div>
+						
+					</div>	
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+
+<script>
+$(".paginations").pagination({
+  items: <%= @comments_count %>,
+  itemsOnPage: 2,
+	currentPage: <%= params[:page] || 1 %>,
+	hrefTextPrefix: "?page=",
+  cssStyle: 'light-theme'
+});
+</script>

@@ -1,0 +1,70 @@
+<% if user_signed_in? %>
+	
+	<div class="bg_cont1">
+		<div class="bg_cont">
+			<section id="content">
+				<div class="main">
+					<div class="inside">
+						<h2>Cart "<%= @cart.name %>"</h2>
+						<div class="container_16 detail_package">
+							<h3 class="total_cart">Total: <span></span> USD</h3>
+						</div>
+						<div class="container_16 detail_package">
+							<div class="container">
+								
+								<% total = 0 %>
+								<% @cart.cart_items.each do |item| %>
+									<div class="grid_5 <%= @cart.status %>" style="margin-bottom: 20px; position:relative">
+										<% if item.package.discount.present? %>
+											<strong class="discount">-<%= item.package.discount %>$</strong>
+										<% end %>
+										<a href="/packages/<%= item.package.id %>"><img alt="" src="<%= item.package.image.url(:medium) %>" class="img-indent"/></a><br>
+										<strong class="txt"><%= item.package.description %></strong>
+										<% total += item.price *  item.quantity %>
+										<input data-id="<%= item.id %>" class="quantity_input" id="quantity_<%= item.quantity %>" value="<%= item.quantity %>"/> 
+										<span style="margin-top: 8px; float:left;"><%= @cart.status == "close" ? "#{item.quantity} " : "" %>x <%= item.price %> = <span id="total_<%= item.id %>" data-price="<%= item.price %>"><%= item.price *  item.quantity %></span> USD</span>
+										<%= link_to("", "/cart_items/#{item.id}", method: "delete", class: "glyphicons remove item", style: "float:left") %>
+									</div>
+								<% end %>
+								
+							</div>
+						</div>
+						
+						<div class="container_16 detail_package" style="text-align:center">
+							<a href="/confirm_cart/<%= @cart.id %>" class="pay_center btn btn-primary btn-xlarge">Confirm</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<% end %>
+
+<script>
+$(".total_cart span").html("<%= total %>");
+
+$(".quantity_input").change(function(event) {
+	var el = $(event.currentTarget);
+	var id = el.attr("data-id");
+	var num = el.val();
+	var price = $("#total_"+id).attr("data-price");
+	var total = parseInt(num) * parseFloat(price);
+	$("#total_"+id).html(total);
+	$.ajax({
+		type: "Post",
+		url: "/cart_items/",
+		data: {id: id, quantity: num, authenticity_token: $("[name='csrf-token']").attr("content")},
+		success: function (data) {
+			console.log(data);
+		}
+	})
+	var total_all = 0;
+	$.each($("[id^='total_']"), function(index, item) {
+		var sum = $(item).html();
+		total_all += parseInt(sum);
+	})
+	
+	$(".total_cart span").html(total_all);
+})
+</script>
