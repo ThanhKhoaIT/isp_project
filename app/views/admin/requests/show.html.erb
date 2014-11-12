@@ -1,0 +1,17 @@
+<h3>
+	<i class="glyphicons sun"></i> Detail request
+</h3>
+<hr/>
+<ul id="requests">
+	<% @cities.each_with_index do |city_id, index| %>
+		<% city = City.find city_id %>
+		<li class="li request <%= @flights[index] %>">
+			<%= city.name %>
+			<i class="glyphicons <%= @flights[index] %>"></i>
+		</li>
+	<% end %>
+	
+	<% if !@request.approved %>
+		<a href="/admin/requests/<%= @request.id %>" style="width:100%; border:1px solid #ddd; margin-top: 30px" data-method="put" class="btn">Approving</a>
+	<% end %>
+</ul>

@@ -1,0 +1,29 @@
+<h3>
+	<i class="glyphicon glyphicon-book"></i> Contacts
+</h3>
+<hr/>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Tools</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @contacts.each_with_index do |contact, index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= contact.name %></td>
+				<td><%= contact.email %></td>
+				<td><%= contact.phone %></td>
+				<td class="tools">
+					<a href="/admin/contacts/<%= contact.id %>" class="glyphicons eye_open"></a>
+					<a href="/admin/contacts/<%= contact.id %>" data-method="delete" class="glyphicons bin"></a>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

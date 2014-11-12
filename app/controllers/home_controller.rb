@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
   
   def create_package
+    redirect_to "/users/sign_in" if !user_signed_in?
   end
   
   def confirm_cart
@@ -58,7 +59,6 @@ class HomeController < ApplicationController
       Usermailer.pay_success(cart).deliver if cart.saves
     end
   end
-
   
   def active
     @user = User.find_by_token_active params[:token]
@@ -70,18 +70,30 @@ class HomeController < ApplicationController
     end
   end
 
-  def contacts
-    
+  def contacts  
+    @contact = Contact.new
   end
   
   def contacts_create
-    
+    Contact.create(contact_params)
+    redirect_to "/"
   end
 
   
   def build_package
+    if user_signed_in?
+      current_user.requests.create({
+        cities:   params[:cities].split("|").collect{|i| i.split(",")[1]}.join(","), 
+        flights:  params[:flights].split("|").collect{|i| i.split(",")[1]}.join(",")
+      })      
+    end
     render json: {success: true}
   end
+  
+  def create_package_ok
+    
+  end
+
 
   def cities_to
     city = City.find params[:city]
@@ -99,5 +111,10 @@ class HomeController < ApplicationController
       render json: {flights: []}
     end
   end
+
+  def contact_params
+    params.require(:contact).permit!
+  end
+
 
 end

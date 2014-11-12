@@ -19,7 +19,7 @@
 							<a href="#" onClick="document.getElementById('Search').submit()" class=" fright alignMiddle">
 								<img alt="" src="/assets/button.png" />
 							</a>
-							<input type="text" class="input" placeholder="Quick Search..."/>
+							<input type="text" id="search" class="input" placeholder="Quick Search..."/>
 						</div>
 					</div>
 				</form>
@@ -27,7 +27,7 @@
 					<nav>
 						<ul class="sf-menu">
 							<li>
-								<a href="/" class="<%= params[:controller] == 'home' ? 'current' : '' %>">Home</a>
+								<a href="/" class="<%= params[:controller] == 'home' and params[:action] != 'contacts' ? 'current' : '' %>">Home</a>
 							</li>
 							<li>
 								<a href="/packages" class="<%= params[:controller] == 'packages' ? 'current' : '' %>">Packages</a>
@@ -36,11 +36,11 @@
 								<a href="/comments" class="<%= params[:controller] == 'comments' ? 'current' : '' %>">Reviews</a>
 							</li>
 							<li>
-								<a href="/contacts">contacts</a>
+								<a href="/contacts" class="<%= params[:action] == 'contacts' ? 'current' : '' %>">Contacts</a>
 							</li>
 							<% if user_signed_in? %>
 							<li class="min">
-								<%= link_to("My Cart",  "/carts") %>
+								<%= link_to("My Cart",  "/carts", class: params[:controller] == 'carts' ? 'current' : '') %>
 							</li>
 							<li class="min">
 								<%= link_to("Logout",  destroy_user_session_path, method: "delete") %>

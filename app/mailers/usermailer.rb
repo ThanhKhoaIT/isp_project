@@ -12,5 +12,9 @@ class Usermailer < ActionMailer::Base
     mail(to: @cart.user.email, subject: 'Pay successful!')
   end
 
+  def approved(request)
+    @request = request
+    mail(to: @request.user.email, subject: 'Request is approved!')
+  end
 
 end

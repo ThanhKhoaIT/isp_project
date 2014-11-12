@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi! <%= @request.user.full_name %></h1>
+    <p>Your request is approved!</p>
+		<p>Request created at <%= @request.created_at.strftime("%d %B %Y") %>.</p>
+		<p>Thank you for make request!</p>
+  </body>
+</html>

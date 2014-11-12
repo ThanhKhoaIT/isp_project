@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users#, :controllers => { :registrations => "users/registrations" }
-  # devise_for :admin_users, ActiveAdmin::Devise.config
-  # ActiveAdmin.routes(self)
+  devise_for :users
   
   root to: 'home#index'
   
   get "create_package" => "home#create_package"
   post "create_package" => "home#build_package"
+  get "create_package_ok" => "home#create_package_ok"
   get "packages/:id" => "packages#show"
   get "packages" => "packages#index"
   get "cities_to" => "home#cities_to"
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
   post "callback" => "home#callback"
   
   get "carts" => "carts#index"
+  
   resources :carts
   
   resources :comments
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :cities
     resources :flights
     resources :packages
+    resources :contacts
+    resources :requests
   end
   
   

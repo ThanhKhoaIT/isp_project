@@ -177,14 +177,15 @@ $(document).ready(function() {
 			type: "POST",
 			url: "/create_package",
 			data: {
-				selected: selected_types,
-				cities: cities_ids,
+				flights: selected_types.join("|"),
+				cities: cities_ids.join("|"),
 				authenticity_token: $("[name='csrf-token']").attr("content")
 			},
 			success: function (data) {
 				console.log(data);
+				data = JSON.parse(data);
 				if (data.success) {
-					window.location.href= "/";
+					window.location.href= "/create_package_ok";
 				}
 			}
 			

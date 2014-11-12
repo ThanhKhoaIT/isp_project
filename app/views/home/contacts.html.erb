@@ -1,0 +1,41 @@
+<div class="bg_cont1">
+	<div class="bg_cont">
+		<section id="content">
+			<div class="main">
+				<div class="inside">
+					<div class="container_16">
+						<div class="container">
+							<div class="grid_5 alpha">
+								<h2>Contact info</h2>
+								<iframe width="217" height="192" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3919.335463917459!2d106.6672361!3d10.7855983!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed18018a93f%3A0x57f3da3fb220a3d3!2zQ8OhY2ggTeG6oW5nIFRow6FuZyA4LCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1415819288138" width="600" height="450" frameborder="0" style="border:0"></iframe>
+								<div class="indent5">
+									<strong class="txt5">FlyAndStay LTD.</strong><br>
+									509 CMT8, Q10 ,<br>
+									Ho Chi Minh City, VN.
+									<p class="block-contact"><span>+1 800 559 6580</span>Freephone:<br>  
+										<span>+1 800 603 6035</span>Telephone: <br>  
+										<span>+1 800 889 9898 </span>FAX:<br>             
+										<a href="#">E-mail: admin@isp-app.tk</a></p>
+									</div>
+								</div>
+								<div class="grid_11 omega" id='contact'>
+									<div class="suffix_1">
+										<h2>Get in touch</h2>
+										<%= semantic_form_for @contact, action: "post" do |f| %>
+											<%= f.input :name, label: false, input_html: {placeholder: "Name"} %>
+											<%= f.input :email, label: false, input_html: {placeholder: "Email"} %>
+											<%= f.input :phone, label: false, input_html: {placeholder: "Phone"} %>
+											<%= f.input :message, label: false, input_html: {placeholder: "Message"} %>
+											
+											<input type="submit" value="Done" class="btn" style="height: 30px; border: 1px solid #ddd; float:right; margin-right: -26px">
+										<% end %>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>

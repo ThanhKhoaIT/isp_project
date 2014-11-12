@@ -27,6 +27,11 @@ class Admin::PackagesController < AdminController
     @package.destroy
     redirect_to "/admin/packages"
   end
+
+  def vip
+    
+  end
+
   
   def params_strong
     params.require(:package).permit!#(:id, :description, :total_amount, :total_days, :discount, :image, :name, :city_ids)
