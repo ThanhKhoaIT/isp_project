@@ -24,7 +24,10 @@ test:
 
 production:
   <<: *default
-  database: production_isp
+	adapter: sqlite3
+  database: db/production_isp.sqlite3
+  pool: 5
+  timeout: 5000
   # adapter: postgresql
 #   host: ec2-54-225-101-164.compute-1.amazonaws.com
 #   username: lvfakpsnxtndfq
