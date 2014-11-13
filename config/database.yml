@@ -5,11 +5,12 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8
-  username: root
-  password: 
-  host: localhost
+  adapter: postgresql
+  host: ec2-54-225-101-164.compute-1.amazonaws.com
+  username: lvfakpsnxtndfq
+  database: dbmr0abjbn1heo
+  password: qvz4QbWRu-f1bZanTsNcG6dLvb
+  port: 5432
 
 development:
   <<: *default
