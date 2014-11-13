@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :comments
-  has_many :carts
+  # has_many :carts
   has_many :requests
   
   require "digest/md5"
