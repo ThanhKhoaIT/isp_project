@@ -58,7 +58,7 @@ class HomeController < ApplicationController
       cart = Cart.find params[:cart]
       if cart
         cart.status = "close"
-        Usermailer.pay_success(cart).deliver if cart.saves
+        Usermailer.pay_success(cart).deliver if cart.save
       end
     end
   end
