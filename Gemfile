@@ -51,7 +51,7 @@ gem 'spring',        group: :development
 
 
 
-
+gem 'sqlite3'
 gem 'mysql2'
 
 gem "thin"
