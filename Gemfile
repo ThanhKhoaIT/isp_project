@@ -50,7 +50,7 @@ gem 'spring',        group: :development
 
 
 
-
+gem 'pg'
 gem 'sqlite3'
 gem 'mysql2'
 
