@@ -67,3 +67,7 @@ gem "paperclip", "~> 4.2"
 gem 'formtastic', '~> 3.0'
 
 gem 'paypal-sdk-adaptivepayments'
+
+group :production do
+  gem 'unicorn'
+end
