@@ -24,4 +24,9 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: isp
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: karlnguyen
+  host: localhost
