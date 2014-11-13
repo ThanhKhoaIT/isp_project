@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   # before_action :authenticate_user!
   require 'paypal-sdk-adaptivepayments'
   
+  skip_before_filter :verify_authenticity_token, :only => [:callback]
+  
   def index
     @packages_recently = Package.order("id desc").first(6)
     @comments_recently = Comment.order("id desc").first(6)
