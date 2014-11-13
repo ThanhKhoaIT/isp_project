@@ -52,10 +52,12 @@ class HomeController < ApplicationController
 
   
   def callback
-    cart = Cart.find params[:cart]
-    if cart
-      cart.status = "close"
-      Usermailer.pay_success(cart).deliver if cart.saves
+    if params[:status] and params[:status] == "COMPLETED" and params[:cart]
+      cart = Cart.find params[:cart]
+      if cart
+        cart.status = "close"
+        Usermailer.pay_success(cart).deliver if cart.saves
+      end
     end
   end
   
