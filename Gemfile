@@ -71,3 +71,5 @@ gem 'paypal-sdk-adaptivepayments'
 group :production do
   gem 'unicorn'
 end
+
+gem 'rack-cors', :require => 'rack/cors'

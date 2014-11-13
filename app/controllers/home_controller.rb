@@ -30,7 +30,6 @@ class HomeController < ApplicationController
         :currencyCode => "USD",
         :feesPayer => "SENDER",
         :ipnNotificationUrl => "#{APP_CONFIG['www']}/callback?cart=#{@cart.id}",
-        # :ipnNotificationUrl => "http://dothanhland.com/?cart=#{@cart.id}",
         :receiverList => {
           :receiver => [{
             :amount => @cart.total,
