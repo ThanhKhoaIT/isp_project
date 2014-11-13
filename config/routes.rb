@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "confirm_cart/:id" => "home#confirm_cart"
   post "confirm" => "home#confirm"
   get "active/:token" => "home#active"
+  get "unactive" => "home#unactive"
   get "contacts" => "home#contacts"
   post "contacts" => "home#contacts_create"
   get "callback" => "home#callback"

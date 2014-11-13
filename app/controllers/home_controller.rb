@@ -72,6 +72,13 @@ class HomeController < ApplicationController
       @user.save(validate: false)
     end
   end
+  
+  def unactive
+    if !user_signed_in? or (current_user and current_user.active)
+      redirect_to "/"
+    end
+  end
+
 
   def contacts  
     @contact = Contact.new

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
   
+  before_action :check_active_account
+  
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   def configure_permitted_parameters
@@ -22,4 +24,11 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+  
+  def check_active_account
+    if user_signed_in? and current_user and current_user.active != true and params[:action] != "unactive"
+      redirect_to "/unactive"
+    end
+  end
+
 end
