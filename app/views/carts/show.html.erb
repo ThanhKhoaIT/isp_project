@@ -29,10 +29,11 @@
 								
 							</div>
 						</div>
-						
-						<div class="container_16 detail_package" style="text-align:center">
-							<a href="/confirm_cart/<%= @cart.id %>" class="pay_center btn btn-primary btn-xlarge">Confirm</a>
-						</div>
+						<% if @cart.status == "new" %>
+							<div class="container_16 detail_package" style="text-align:center">
+								<a href="/confirm_cart/<%= @cart.id %>" class="pay_center btn btn-primary btn-xlarge">Confirm</a>
+							</div>
+						<% end %>
 					</div>
 				</div>
 			</section>

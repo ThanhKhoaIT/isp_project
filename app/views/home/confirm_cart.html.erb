@@ -11,15 +11,16 @@
 								Total: <%= @cart.total %> USD
 							</div>
 						</div>
-						
-						<div class="container_16 detail_package" style="text-align:center">
-							<a href="#" class="pay_center btn btn-primary btn-xlarge">Pay</a>
-						</div>
-						<div>
-							<h3>Account for TEST</h3>
-							<p style="margin:0px">Username: <span style="font-weight:bold">thanhkhoait-buyer@gmail.com</span></p>
-							<p style="margin:0px">Password: <span style="font-weight:bold">123!@#ABC</span></p>
-						</div>
+						<% if @cart.status == "new" %>
+							<div class="container_16 detail_package" style="text-align:center">
+								<a href="#" class="pay_center btn btn-primary btn-xlarge">Pay</a>
+							</div>
+							<div>
+								<h3>Account for TEST</h3>
+								<p style="margin:0px">Username: <span style="font-weight:bold">thanhkhoait-buyer@gmail.com</span></p>
+								<p style="margin:0px">Password: <span style="font-weight:bold">123!@#ABC</span></p>
+							</div>
+						<% end %>
 					</div>
 				</div>
 			</section>
