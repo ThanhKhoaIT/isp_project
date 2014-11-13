@@ -56,7 +56,7 @@ class HomeController < ApplicationController
   def callback
     if params[:status] and params[:status] == "COMPLETED" and params[:cart]
       cart = Cart.find params[:cart]
-      if cart
+      if cart and cart.status == "new"
         cart.status = "close"
         Usermailer.pay_success(cart).deliver if cart.save
       end
