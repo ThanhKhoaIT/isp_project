@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  # has_many :comments
-#   has_many :carts
-#   has_many :requests
+  has_many :comments
+  has_many :carts
+  has_many :requests
   
   require "digest/md5"
   
@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
     rd = (0...25).map { (65 + rand(26)).chr }.join
     self.token_active = rd
     self.active = false
-    save
     Usermailer.active_email(self).deliver
   end
 

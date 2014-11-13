@@ -37,7 +37,7 @@
 <script>
 $(".paginations").pagination({
   items: <%= @comments_count %>,
-  itemsOnPage: 2,
+  itemsOnPage: 5,
 	currentPage: <%= params[:page] || 1 %>,
 	hrefTextPrefix: "?page=",
   cssStyle: 'light-theme'
