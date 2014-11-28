@@ -3,11 +3,11 @@
     <fieldset class="clearfix">
       <p>
 				<span class="fontawesome-user"></span>
-				<%= f.email_field :email, autofocus: true, required: "required"%>
+				<%= f.email_field :email, autofocus: true, required: "required", placeholder: "Email"%>
 			</p>
       <p>
 				<span class="fontawesome-lock"></span>
-				<%= f.password_field :password, autocomplete: "off", required: 'required' %>
+				<%= f.password_field :password, autocomplete: "off", required: 'required', placeholder: "Password" %>
 			</p>
       <p><input type="submit" value="Login"></p>
     </fieldset>

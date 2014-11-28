@@ -16,6 +16,10 @@ class Admin::RequestsController < AdminController
     Usermailer.approved(@request).deliver
     redirect_to "/admin/requests"
   end
-
-
+  
+  def destroy
+    @request = Request.find params[:id]
+    @request.destroy
+    redirect_to "/admin/requests"
+  end
 end
